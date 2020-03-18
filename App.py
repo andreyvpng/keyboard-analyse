@@ -2,7 +2,7 @@ import os
 import sys
 
 from Keylogger import Keylogger
-from Symbols import Symbols
+from Analyse import Analyse
 
 def using():
     print("Usage: python App.py {start|analys}")
@@ -15,8 +15,8 @@ command = sys.argv[1]
 if command == "start":
     Keylogger().start()
 elif command == "analys":
-    data = Symbols()
-    data.frequency_analysis()
-    print(data.dict())
+    analyse = Analyse()
+    analyse.frequency_analysis()
+    print(analyse.get_dict())
 else:
     using()
