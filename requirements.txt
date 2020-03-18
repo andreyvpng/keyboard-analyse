@@ -1,0 +1,4 @@
+keyboard==0.13.4
+python-xlib==0.26
+pyxhook==1.0.0
+six==1.14.0
