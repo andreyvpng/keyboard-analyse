@@ -16,7 +16,7 @@ if command == "start":
     Keylogger().start()
 elif command == "analys":
     analyse = Analyse()
-    analyse.frequency_analysis()
+    analyse.do_and_save_plot()
     print(analyse.get_dict())
 else:
     using()
