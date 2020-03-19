@@ -1,8 +1,8 @@
-import settings
-import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cbook as cbook
 import matplotlib.image as mpimg
+
+import settings
 from keyboard import Qwerty
 
 class Symbols:
@@ -47,9 +47,14 @@ class Analyse:
 
     def __convert_dict_to_list(self):
         a, data = [], self.data.get_dict()
+
         keyboard = Qwerty()
+        data = keyboard.merge_common_buttons(data)
+
         for item in data:
             x, y = keyboard.get_xy_of_symbols(item)
+            if x == 0 and y == 0:
+                continue
             a.append([x, y, data[item]])
 
         def sortByCount(val):
