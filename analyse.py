@@ -1,6 +1,8 @@
 import settings
-
+import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.cbook as cbook
+import matplotlib.image as mpimg
 
 class Symbols:
     symbols_dict = dict()
@@ -34,38 +36,43 @@ class Analyse:
 
     @staticmethod
     def __split_array(array):
-        symbols=[]
-        count=[]
-
+        x, y, count = [], [], []
         for item in array:
-            symbols.append(item[0])
-            count.append(item[1])
+            x.append(item[0])
+            y.append(item[1])
+            count.append(item[2])
 
-        return (symbols, count)
+        return (x, y, count)
 
     def __convert_dict_to_list(self):
-        a = []
-        data = self.data.get_dict()
+        a, data = [], self.data.get_dict()
         for item in data:
-            a.append([item, data[item]])
+            x, y = 0, 0
+            if item == "Return":
+                x, y = 350, 65
+            a.append([x, y, data[item]])
+        def sortByCount(val):
+            return val[2]
+        a.sort(key=sortByCount, reverse=True)
 
-        def sortSecond(val):
-            return val[1]
-        a.sort(key=sortSecond, reverse=True)
-
-        return a[:25]
+        return a
 
     def do_and_save_plot(self):
         self.frequency_analysis();
 
-        symbols, count = self.__split_array(
+        x, y, count = self.__split_array(
                 self.__convert_dict_to_list())
 
         fig, ax = plt.subplots()
 
-        ax.barh(symbols, count, height=0.8)
-        print(len(symbols))
-        plt.savefig('analyse.png' )
+        ax.scatter(x, y, s=count, alpha=0.5)
+
+        fig.tight_layout()
+
+        img = mpimg.imread('qwe.png')
+        imgplot = plt.imshow(img)
+
+        plt.savefig('analyse.png')
 
     def get_dict(self):
         return self.data.get_dict()
