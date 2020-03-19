@@ -1,8 +1,8 @@
 import os
 import sys
 
-from Keylogger import Keylogger
-from Analyse import Analyse
+from keylogger import Keylogger
+from analyse import Analyse
 
 def using():
     print("Usage: python App.py {start|analys}\n")

@@ -1,4 +1,4 @@
-import Settings
+import settings
 
 import matplotlib.pyplot as plt
 
@@ -19,7 +19,7 @@ class Symbols:
 
 class Analyse:
     data = Symbols()
-    log_file = Settings.log_file
+    log_file = settings.log_file
 
     def __init__(self):
         pass
