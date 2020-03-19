@@ -51,19 +51,21 @@ class Analyse:
 
         def sortSecond(val):
             return val[1]
-        a.sort(key=sortSecond)
+        a.sort(key=sortSecond, reverse=True)
 
-        return a
+        return a[:25]
 
     def do_and_save_plot(self):
         self.frequency_analysis();
 
-        fig, ax = plt.subplots()
         symbols, count = self.__split_array(
                 self.__convert_dict_to_list())
 
-        ax.bar(symbols, count)
-        plt.savefig('analyse.png')
+        fig, ax = plt.subplots()
+
+        ax.barh(symbols, count, height=0.8)
+        print(len(symbols))
+        plt.savefig('analyse.png' )
 
     def get_dict(self):
         return self.data.get_dict()
