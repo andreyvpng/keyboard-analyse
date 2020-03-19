@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cbook as cbook
 import matplotlib.image as mpimg
+from keyboard import Qwerty
 
 class Symbols:
     symbols_dict = dict()
@@ -46,15 +47,15 @@ class Analyse:
 
     def __convert_dict_to_list(self):
         a, data = [], self.data.get_dict()
+        keyboard = Qwerty()
         for item in data:
-            x, y = 0, 0
-            if item == "Return":
-                x, y = 350, 65
+            x, y = keyboard.get_xy_of_symbols(item)
             a.append([x, y, data[item]])
+
         def sortByCount(val):
             return val[2]
-        a.sort(key=sortByCount, reverse=True)
 
+        a.sort(key=sortByCount, reverse=True)
         return a
 
     def do_and_save_plot(self):
@@ -69,7 +70,7 @@ class Analyse:
 
         fig.tight_layout()
 
-        img = mpimg.imread('qwe.png')
+        img = mpimg.imread(Qwerty.image_path)
         imgplot = plt.imshow(img)
 
         plt.savefig('analyse.png')
