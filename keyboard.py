@@ -1,6 +1,15 @@
 class Keyboard:
     image_path_=""
+
     STEP = 26
+    OFFSET_X = 0
+    OFFSET_Y = 1
+    OFFSET = [
+        [15, 12],
+        [32, 40],
+        [36, 64],
+        [50, 90],
+        [30, 120]]
 
     def __init__(self):
         pass
@@ -26,11 +35,13 @@ class Keyboard:
         return dictionary
 
     def get_xy_of_symbols(self, symbol):
-        for row in self.keyboard:
-            if symbol in row["keys"]:
-                index_in_row = row["keys"].index(symbol)
-                x = row["begin_x"] + self.STEP * index_in_row
-                y = row["begin_y"]
+        for counter, row in enumerate(self.keyboard):
+            if symbol in row:
+                index_of_row = counter
+                index_in_row = row.index(symbol)
+
+                x = self.OFFSET[index_of_row][self.OFFSET_X] + self.STEP * index_in_row
+                y = self.OFFSET[index_of_row][self.OFFSET_Y]
                 return (x, y)
         return (0, 0)
 
@@ -38,45 +49,20 @@ class Qwerty(Keyboard):
     image_path="qwe.png"
 
     keyboard = [
-        {
-            "begin_x": 15,
-            "begin_y": 12,
-            "keys": [
-                "grave", "1", "2", "3","4", "5", "6", "7",
-                "8", "9", "0", "minus", "equal", "backspace"
-            ]
-        },
-        {
-            "begin_x": 32,
-            "begin_y": 40,
-            "keys": [
-                "tab", "q", "w", "e","r", "t", "y", "u",
-                "i", "o", "p", "bracketleft", "bracketright", "backslash"
-            ]
-        },
-        {
-            "begin_x": 36,
-            "begin_y": 64,
-            "keys": [
-                "caps_lock", "a", "s", "d", "f", "g",
-                "h", "j", "k", "l", "semicolon", "apostrophe", "return"
-            ]
-        },
-        {
-            "begin_x": 50,
-            "begin_y": 90,
-            "keys": [
-                "shift_l", "z", "x", "c", "v",
-                "b", "n", "m", "comma", "period", "slash"
-            ]
-        },
-        {
-            "begin_x": 30,
-            "begin_y": 120,
-            "keys": [
-                "control_l", "super_l", "alt_l", "_", "_", "space"
-            ]
-        }
+        # 1 row
+        ["grave", "1", "2", "3","4", "5", "6", "7", "8", "9", "0",
+            "minus", "equal", "backspace"],
+        # 2 row
+        ["tab", "q", "w", "e","r", "t", "y", "u", "i", "o", "p",
+            "bracketleft", "bracketright", "backslash"],
+        # 3 row
+        ["caps_lock", "a", "s", "d", "f", "g", "h", "j", "k", "l",
+            "semicolon", "apostrophe", "return"],
+        # 4 row
+        ["shift_l", "z", "x", "c", "v", "b", "n", "m", "comma",
+            "period", "slash"],
+        # 5 row
+        ["control_l", "super_l", "alt_l", "_", "_", "space"]
     ]
 
     common_button = {
