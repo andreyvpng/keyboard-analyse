@@ -31,10 +31,10 @@ class Keyboard:
     OFFSET = [[15, 12], [32, 40], [36, 64], [50, 90], [30, 120]]
 
     image_path_=""
-    symbols_list = []
 
-    def __init__(self, symbols):
-        self.symbols_dict = symbols
+    def __init__(self):
+        self.symbols_list = []
+        self.symbols_dict = Symbols()
         self.merge_common_buttons()
         self.convert_dict_to_list()
 
@@ -93,6 +93,7 @@ class Keyboard:
                 x = self.OFFSET[index_of_row][self.OFFSET_X] + self.STEP * index_in_row
                 y = self.OFFSET[index_of_row][self.OFFSET_Y]
                 return (x, y)
+        print(type(self).__name__, symbol)
         return (0, 0)
 
 class Qwerty(Keyboard):
@@ -143,3 +144,26 @@ class Qwerty(Keyboard):
         "greater": "period",
         "question": "splash"
     }
+
+class Dvorak(Keyboard):
+    image_path = "./images/dvorak.png"
+    image_result_path = "./result/drovak.png"
+
+    keyboard = [
+        # 1 row
+        ["grave", "1", "2", "3","4", "5", "6", "7", "8", "9", "0",
+            "[", "]", "backspace"],
+        # 2 row
+        ["tab", "'", ",", ".", "p", "y", "f", "g", "c", "r", "l",
+            "slash", "equal", "backslash"],
+        # 3 row
+        ["caps_lock", "a", "o", "e", "u", "i", "d", "h", "t", "n",
+            "s", "minus", "return"],
+        # 4 row
+        ["shift_l", "semicolon", "q", "j", "k", "x", "b", "m", "w",
+            "v", "z"],
+        # 5 row
+        Qwerty.keyboard[4]
+    ]
+
+    common_button = {}

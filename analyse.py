@@ -4,7 +4,7 @@ import matplotlib.cbook as cbook
 import matplotlib.image as mpimg
 
 import settings
-from keyboard import Qwerty, Symbols
+from keyboard import Qwerty, Dvorak, Symbols
 
 
 class Analyse:
@@ -14,16 +14,15 @@ class Analyse:
         pass
 
     def do_and_save_plot(self):
-        symbols = Symbols()
+        keyboard_classes = [Dvorak, Qwerty]
 
-        keyboard_classes = [Qwerty, ]
         for keyboard in keyboard_classes:
-            x, y, count = (keyboard)(symbols).get_scater()
+            x, y, count = (keyboard)().get_scater()
 
             fig, ax = plt.subplots()
             ax.scatter(x, y, s=count, alpha=0.5)
             fig.tight_layout()
-            img = mpimg.imread(Qwerty.image_path)
+            img = mpimg.imread((keyboard).image_path)
             imgplot = plt.imshow(img)
 
             image_result_path = (keyboard).image_result_path
