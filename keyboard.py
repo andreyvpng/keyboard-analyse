@@ -96,7 +96,8 @@ class Keyboard:
         return (0, 0)
 
 class Qwerty(Keyboard):
-    image_path="qwe.png"
+    image_path="./images/qwerty.png"
+    image_result_path="./result/qwerty.png"
 
     keyboard = [
         # 1 row
