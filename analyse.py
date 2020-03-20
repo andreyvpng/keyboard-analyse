@@ -14,10 +14,11 @@ class Analyse:
         pass
 
     def do_and_save_plot(self):
-        keyboard_classes = [Dvorak, Qwerty]
+        keyboard_classes = [Qwerty, Dvorak]
+        symbols = Symbols()
 
         for keyboard in keyboard_classes:
-            x, y, count = (keyboard)().get_scater()
+            x, y, count = (keyboard)(symbols).get_scater()
 
             fig, ax = plt.subplots()
             ax.scatter(x, y, s=count, alpha=0.5)

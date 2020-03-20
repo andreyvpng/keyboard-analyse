@@ -32,9 +32,9 @@ class Keyboard:
 
     image_path_=""
 
-    def __init__(self):
+    def __init__(self, symbols):
         self.symbols_list = []
-        self.symbols_dict = Symbols()
+        self.symbols_dict = dict(symbols.get_dict())
         self.merge_common_buttons()
         self.convert_dict_to_list()
 
@@ -48,7 +48,7 @@ class Keyboard:
         return (x, y, count)
 
     def convert_dict_to_list(self):
-      dictionary = self.symbols_dict.get_dict()
+      dictionary = self.symbols_dict
 
       for item in dictionary:
           x, y = self.get_coordinates_of_symbols(item)
@@ -65,7 +65,7 @@ class Keyboard:
         symbols_for_del = []
         symbols_for_add = dict()
 
-        dictionary = self.symbols_dict.get_dict()
+        dictionary = self.symbols_dict
 
         for item in dictionary:
             if item in self.common_button:
@@ -93,7 +93,6 @@ class Keyboard:
                 x = self.OFFSET[index_of_row][self.OFFSET_X] + self.STEP * index_in_row
                 y = self.OFFSET[index_of_row][self.OFFSET_Y]
                 return (x, y)
-        print(type(self).__name__, symbol)
         return (0, 0)
 
 class Qwerty(Keyboard):
@@ -142,7 +141,7 @@ class Qwerty(Keyboard):
         # 4 row
         "less": "comma",
         "greater": "period",
-        "question": "splash"
+        "question": "slash"
     }
 
 class Dvorak(Keyboard):
@@ -152,9 +151,9 @@ class Dvorak(Keyboard):
     keyboard = [
         # 1 row
         ["grave", "1", "2", "3","4", "5", "6", "7", "8", "9", "0",
-            "[", "]", "backspace"],
+            "bracketleft", "bracketright", "backspace"],
         # 2 row
-        ["tab", "'", ",", ".", "p", "y", "f", "g", "c", "r", "l",
+        ["tab", "apostrophe", "comma", "period", "p", "y", "f", "g", "c", "r", "l",
             "slash", "equal", "backslash"],
         # 3 row
         ["caps_lock", "a", "o", "e", "u", "i", "d", "h", "t", "n",
@@ -166,4 +165,5 @@ class Dvorak(Keyboard):
         Qwerty.keyboard[4]
     ]
 
-    common_button = {}
+    common_button = Qwerty.common_button
+    #common_button = {}
