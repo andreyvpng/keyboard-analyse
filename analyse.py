@@ -21,16 +21,18 @@ class Analyse:
         keyboard_classes = [Qwerty, Dvorak]
         symbols = Symbols()
 
-        for keyboard in keyboard_classes:
-            x, y, count = (keyboard)(symbols).get_scater()
+        for keyboard_class in keyboard_classes:
+            keyboard = (keyboard_class)(symbols)
+
+            x, y, count = keyboard.get_scater()
 
             fig, ax = plt.subplots()
             ax.scatter(x, y, s=count, alpha=0.5)
             fig.tight_layout()
-            img = mpimg.imread((keyboard).image_path)
+            img = mpimg.imread(keyboard.get_image_path())
             imgplot = plt.imshow(img)
 
-            image_result_path = (keyboard).image_result_path
+            image_result_path = keyboard.get_image_result_path()
             create_dir_if_not_exist(os.path.dirname(image_result_path))
             plt.savefig(image_result_path)
 

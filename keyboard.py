@@ -95,9 +95,16 @@ class Keyboard:
                 return (x, y)
         return (0, 0)
 
+    def get_image_path(self):
+        path = "./images/" + self.name + ".png"
+        return path
+
+    def get_image_result_path(self):
+        path = "./result/" + self.name + ".png"
+        return path
+
 class Qwerty(Keyboard):
-    image_path="./images/qwerty.png"
-    image_result_path="./result/qwerty.png"
+    name = "qwerty"
 
     keyboard = [
         # 1 row
@@ -145,8 +152,7 @@ class Qwerty(Keyboard):
     }
 
 class Dvorak(Keyboard):
-    image_path = "./images/dvorak.png"
-    image_result_path = "./result/drovak.png"
+    name = "dvorak"
 
     keyboard = [
         # 1 row
