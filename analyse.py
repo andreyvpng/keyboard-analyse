@@ -6,6 +6,10 @@ import matplotlib.image as mpimg
 import settings
 from keyboard import Qwerty, Dvorak, Symbols
 
+def create_dir_if_not_exist(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
 
 class Analyse:
     log_file = settings.log_file
@@ -27,9 +31,7 @@ class Analyse:
             imgplot = plt.imshow(img)
 
             image_result_path = (keyboard).image_result_path
-            directory = os.path.dirname(image_result_path)
-            if not os.path.exists(directory):
-                os.makedirs(directory)
+            create_dir_if_not_exist(os.path.dirname(image_result_path))
             plt.savefig(image_result_path)
 
     def get_dict(self):
